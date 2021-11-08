@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site":"doggies-api",
     "public": "public",
     "ignore": [
       "firebase.json",
