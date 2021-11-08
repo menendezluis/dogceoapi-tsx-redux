@@ -7,13 +7,10 @@ import RandomSelector from './components/RandomSelector'
 import { Provider } from 'react-redux';
 import store from './store';
 
-//firebase
-import { initializeApp } from "firebase/app";
-import firebaseConfig from './firebase/firebase';
+
 
 function App() {
 
-  const app = initializeApp(firebaseConfig);
 
   return (
     <Provider store={store}>
