@@ -25,7 +25,7 @@ const signInWithGoogle = async () => {
       .where("uid", "==", user.uid)
       .get();
     if (query.docs.length === 0) {
-      await db.collection("users").add({
+      await db.collection("users").doc(user.uid).set({
         uid: user.uid,
         name: user.displayName,
         authProvider: "google",
@@ -49,7 +49,7 @@ const registerWithEmailAndPassword = async (name, email, password) => {
   try {
     const res = await auth.createUserWithEmailAndPassword(email, password);
     const user = res.user;
-    await db.collection("users").add({
+    await db.collection("users").doc(user.uid).set({
       uid: user.uid,
       name,
       authProvider: "local",

@@ -24,8 +24,8 @@ export const fetchDogsList = () => (dispatch: (arg0: { payload: any; type: strin
       .then((response) => {
             console.log(response)
         let data = response.data.message
-        console.log()
-          dispatch(setDogList(Object.keys(data)));
+        console.log(Object.entries(data))
+          dispatch(setDogList(Object.entries(data)));
           
       })
       .catch((error) => console.log(error));
