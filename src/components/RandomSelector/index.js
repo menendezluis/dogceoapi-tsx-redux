@@ -1,23 +1,25 @@
-import React,{ useEffect } from 'react'
+import React,{ useEffect, useState } from 'react'
 //redux
 import { fetchDogRandom } from '../../store/slices/random'
 import {useDispatch,useSelector} from 'react-redux'
 //material
 import Box from '@mui/material/Box'
 import Paper from '@mui/material/Paper';
+import IconButton from '@mui/material/IconButton';
+import RefreshIcon from '@mui/icons-material/Refresh';
 
 //vote
 import Vote from '../Vote';
 import './style.css'
 
 const RandomSelector = () => {
-  
+    const [reload, setReload] = useState(false)
     const { list: random } = useSelector(state => state.random)
-console.log("random",random)
+//console.log("random",random)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchDogRandom())
-    }, [])
+    }, [reload])
     return (
         <div className="container">
              <Box
@@ -54,7 +56,11 @@ console.log("random",random)
                            { random.wiki.temperament ? <> <p>Others:{random.wiki.temperament}</p> </>: null }
                           <Vote />
                            </div>
-                      : <p>Informacion no Disponible</p>  }
+                      : <><p>Not Data to display</p> 
+                       <IconButton onClick={()=>setReload(!reload)} color="secondary" aria-label="Reload">
+       <p>Reload <RefreshIcon /></p>
+      </IconButton>
+                      </> }
                            <p>
                               
 
