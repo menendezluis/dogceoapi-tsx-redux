@@ -16,7 +16,7 @@ const [breedSelection, setbreedSelection] = useState('')
     <Provider store={store}>
     <div >
      <div>
-       <Navbar/>
+       <Navbar breedSelection={setbreedSelection}/>
       
   
   <DogsList breedSelection={setbreedSelection}/>

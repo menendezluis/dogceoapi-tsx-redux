@@ -11,7 +11,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 //redux
 import {useDispatch,useSelector} from 'react-redux'
 
-const Favorite = () => {
+const Favorite = (props) => {
+    const {breedSelection} = props
     const [user, loading, error] = useAuthState(auth);
     const [favoriteDog,setFavoriteDog] = useState('')
     if(user){
@@ -45,7 +46,7 @@ const Favorite = () => {
                
                 <Stack direction="row" spacing={1}>
                 <span> 🐩Favorite Breed 🐶 {favoriteDog}🐕 </span>
-      <IconButton color="secondary" aria-label="Ver fotos">
+      <IconButton color="secondary" onClick={()=>breedSelection(favoriteDog.toLowerCase() )} aria-label="Ver fotos">
         <PhotoCameraIcon />
       </IconButton>
       <IconButton  onClick={()=> deleteFavorite()} color="warning" aria-label="Eliminar Favorito">
