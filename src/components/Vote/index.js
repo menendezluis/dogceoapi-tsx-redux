@@ -12,7 +12,7 @@ import { grey } from '@mui/material/colors';
 
 //firebase
 import { auth,db } from "../../config/firebase";
-import { doc, updateDoc, arrayUnion, arrayRemove } from "firebase/firestore";
+import { doc, updateDoc, arrayUnion, increment  } from "firebase/firestore";
 
 import { useAuthState } from "react-firebase-hooks/auth";
 
@@ -71,11 +71,14 @@ DogsVote.forEach(dat => masiveVote(dat))
 const saveVote = async (dog, value) => {
    // var breedVote =  db.collection("votes").doc(dog.breed);
     const breedVote = doc(db, "votes", dog.breed);
+    const voteDate = new Date()
     try {
         await updateDoc(breedVote, {
-            votes: arrayUnion({"user":user.uid,"value":value})
+            updatedAt: voteDate,
+            value: increment(value),
+            votes: arrayUnion({"user":user.uid,"value":value,"voteDate":voteDate})
         });
-        console.log(dog.breed, value)
+        //console.log(dog.breed, value,voteDate, dog.url)
         } catch (err) {
           console.error(err);
           alert(err.message);

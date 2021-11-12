@@ -12,14 +12,39 @@ import RefreshIcon from '@mui/icons-material/Refresh';
 import Vote from '../Vote';
 import './style.css'
 
+//firebase
+import { auth,db } from "../../config/firebase";
+import { doc, updateDoc, arrayUnion, increment  } from "firebase/firestore";
+
 const Ranking = () => {
     const [reload, setReload] = useState(false)
+    const [votes, setVotes] = useState([])
+   
     const { list: random } = useSelector(state => state.random)
 //console.log("random",random)
     const dispatch = useDispatch()
     useEffect(() => {
         dispatch(fetchDogRandom())
     }, [reload])
+
+    const getVotes = async()=> {
+      const snapshot = await db.collection('votes').get()
+      let votesTable= []
+      snapshot.docs.forEach(doc => {
+        let dogVote = doc.data()
+       
+        if (dogVote.value)
+        {
+          votesTable.push({"breed":dogVote.breed, "value":dogVote.value})
+        
+        }
+       
+      })
+      setVotes(votesTable)
+   //   return snapshot.docs.map(doc => doc.data());
+  }
+  
+  getVotes()
     return (
         <div className="container">
              <Box
@@ -36,13 +61,11 @@ const Ranking = () => {
             <Paper elevation={3}> 
             <div className="row">
            
-        <li>
-          <ul> Bulldog Frances      11589 </ul>
-          <ul> American buldog      2586 </ul>
-          <ul> Pequinez             1256 </ul>
-          <ul> Gran danes           1000</ul>
-          <ul> Chihuahua             900 </ul>
-        </li>
+        
+          <p>Votes</p>
+        {votes.map(dat => 
+          (<p>{dat.breed}{" - "}{dat.value}</p>))}
+        
             </div>
             </Paper>
             </Box>
