@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import DogsList from './components/DogsList'
 import RandomSelector from './components/RandomSelector'
 import DogPhotos from './components/DogPhotos';
+import Ranking from './components/Ranking'
 //redux
 import { Provider } from 'react-redux';
 import store from './store';
@@ -22,7 +23,17 @@ const [breedSelection, setbreedSelection] = useState('')
   <DogsList breedSelection={setbreedSelection}/>
   {breedSelection ? 
     <DogPhotos breedSelection={breedSelection}/> :
-<RandomSelector />
+    
+    <div className="container">
+          <div className="row">
+              <div className="col-sm-9">
+              <RandomSelector />
+              </div>
+              <div className="col-sm-3">  <Ranking /></div>
+        </div>
+    </div>
+
+
   }
   
   

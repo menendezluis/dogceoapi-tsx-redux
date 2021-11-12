@@ -28,6 +28,7 @@ const DogsList = (props) => {
         breedSelection(e.target.value)
         setSelected(e.target.value)
     }
+    console.log(dogListArray)
     return (
         <div className="container">
             <div className="row">

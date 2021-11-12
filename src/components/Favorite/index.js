@@ -45,7 +45,7 @@ const Favorite = (props) => {
                
                
                 <Stack direction="row" spacing={1}>
-                <span> 🐩Favorite Breed 🐶 {favoriteDog}🐕 </span>
+                <span> 🐩Favorite Breed 🐕 - {favoriteDog} </span>
       <IconButton color="secondary" onClick={()=>breedSelection(favoriteDog.toLowerCase() )} aria-label="Ver fotos">
         <PhotoCameraIcon />
       </IconButton>
